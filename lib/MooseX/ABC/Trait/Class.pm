@@ -31,18 +31,6 @@ after _superclasses_updated => sub {
             }
         }
     }
-
-    return if $self->has_required_methods;
-
-    # at this point, the current class didn't have any required methods to
-    # start with, and all of the required methods from superclasses have
-    # been satisfied, so restore the constructor
-
-    my $constructor = $self->find_method_by_name('new');
-    if ($constructor->original_package_name eq 'MooseX::ABC::Role::Object') {
-        my $moose_constructor = Class::MOP::class_of('Moose::Object')->get_method('new');
-        $self->add_method(new => $moose_constructor->clone);
-    }
 };
 
 around _immutable_options => sub {
@@ -50,11 +38,11 @@ around _immutable_options => sub {
     my $self = shift;
     my @options = $self->$orig(@_);
     my $constructor = $self->find_method_by_name('new');
-    if ($constructor->original_package_name eq 'Moose::Object') {
-        push @options, replace_constructor => 1;
+    if ($self->has_required_methods) {
+        push @options, inline_constructor => 0;
     }
     elsif ($constructor->original_package_name eq 'MooseX::ABC::Role::Object') {
-        push @options, inline_constructor => 0;
+        push @options, replace_constructor => 1;
     }
     return @options;
 };
