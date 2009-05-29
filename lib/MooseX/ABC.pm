@@ -17,6 +17,10 @@ sub init_meta {
     shift;
     my %options = @_;
     Moose->init_meta(%options);
+    Moose::Util::MetaRole::apply_base_class_roles(
+        for_class       => $options{for_class},
+        roles           => ['MooseX::ABC::Role::Object'],
+    );
     Moose::Util::MetaRole::apply_metaclass_roles(
         for_class       => $options{for_class},
         metaclass_roles => ['MooseX::ABC::Trait::Class'],
