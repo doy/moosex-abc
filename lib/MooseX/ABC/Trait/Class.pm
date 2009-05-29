@@ -3,11 +3,12 @@ use Moose::Role;
 use MooseX::AttributeHelpers;
 
 has required_methods => (
-    metaclass => 'Collection::Array',
-    is        => 'ro',
-    isa       => 'ArrayRef[Str]',
-    default   => sub { [] },
-    provides  => {
+    metaclass  => 'Collection::Array',
+    is         => 'ro',
+    isa        => 'ArrayRef[Str]',
+    default    => sub { [] },
+    auto_deref => 1,
+    provides   => {
         push => 'add_required_method',
     },
 );
