@@ -45,6 +45,20 @@ after _superclasses_updated => sub {
     }
 };
 
+around _immutable_options => sub {
+    my $orig = shift;
+    my $self = shift;
+    my @options = $self->$orig(@_);
+    my $constructor = $self->find_method_by_name('new');
+    if ($constructor->original_package_name eq 'Moose::Object') {
+        push @options, replace_constructor => 1;
+    }
+    elsif ($constructor->original_package_name eq 'MooseX::ABC::Role::Object') {
+        push @options, inline_constructor => 0;
+    }
+    return @options;
+};
+
 no Moose::Role;
 
 1;
