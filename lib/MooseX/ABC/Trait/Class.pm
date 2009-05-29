@@ -41,7 +41,10 @@ around _immutable_options => sub {
     if ($self->has_required_methods) {
         push @options, inline_constructor => 0;
     }
-    elsif ($constructor->original_package_name eq 'MooseX::ABC::Role::Object') {
+    # we know that the base class has at least our base class role applied,
+    # so it's safe to replace it if there is only one wrapper.
+    elsif ($constructor->isa('Class::MOP::Method::Wrapped')
+        && $constructor->get_original_method == Class::MOP::class_of('Moose::Object')->get_method('new')) {
         push @options, replace_constructor => 1;
     }
     return @options;
