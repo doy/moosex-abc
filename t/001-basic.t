@@ -27,7 +27,5 @@ my $foosub;
 lives_ok { $foosub = Foo::Sub1->new }
     'instantiating concrete subclasses works';
 isa_ok($foosub, 'Foo', 'inheritance is correct');
-TODO: {
-    local $TODO = "constructor stuff isn't done yet";
-    dies_ok { Foo->new } 'instantiating abstract classes fails';
-}
+throws_ok { Foo->new } qr/Foo is abstract, it cannot be instantiated/,
+    'instantiating abstract classes fails';
