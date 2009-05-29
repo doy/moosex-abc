@@ -19,7 +19,8 @@ after _superclasses_updated => sub {
     shift @supers;
     for my $superclass (@supers) {
         my $super_meta = Class::MOP::class_of($superclass);
-        next unless $super_meta->does_role('MooseX::ABC::Trait::Class');
+        next unless $super_meta->meta->can('does_role')
+                 && $super_meta->meta->does_role('MooseX::ABC::Trait::Class');
         for my $method ($super_meta->required_methods) {
             if (!$self->find_method_by_name($method)) {
                 my $classname = $self->name;
