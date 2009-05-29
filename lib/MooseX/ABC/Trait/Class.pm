@@ -15,7 +15,9 @@ has required_methods => (
 
 after _superclasses_updated => sub {
     my $self = shift;
-    for my $superclass ($self->linearized_isa) {
+    my @supers = $self->linearized_isa;
+    shift @supers;
+    for my $superclass (@supers) {
         my $super_meta = Class::MOP::class_of($superclass);
         next unless $super_meta->does_role('MooseX::ABC::Trait::Class');
         for my $method ($super_meta->required_methods) {
