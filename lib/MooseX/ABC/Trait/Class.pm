@@ -24,7 +24,9 @@ after _superclasses_updated => sub {
         for my $method ($super_meta->required_methods) {
             if (!$self->find_method_by_name($method)) {
                 my $classname = $self->name;
-                die "$superclass requires $classname to implement $method";
+                $self->throw_error(
+                    "$superclass requires $classname to implement $method"
+                );
             }
         }
     }
