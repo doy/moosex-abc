@@ -9,7 +9,8 @@ has required_methods => (
     default    => sub { [] },
     auto_deref => 1,
     provides   => {
-        push => 'add_required_method',
+        push  => 'add_required_method',
+        empty => 'has_required_methods',
     },
 );
 
@@ -29,6 +30,18 @@ after _superclasses_updated => sub {
                 );
             }
         }
+    }
+
+    return if $self->has_required_methods;
+
+    # at this point, the current class didn't have any required methods to
+    # start with, and all of the required methods from superclasses have
+    # been satisfied, so restore the constructor
+
+    my $constructor = $self->find_method_by_name('new');
+    if ($constructor->original_package_name eq 'MooseX::ABC::Role::Object') {
+        my $moose_constructor = Class::MOP::class_of('Moose::Object')->get_method('new');
+        $self->add_method(new => $moose_constructor->clone);
     }
 };
 
