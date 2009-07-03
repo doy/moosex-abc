@@ -56,6 +56,11 @@ sub init_meta {
     return Class::MOP::class_of($options{for_class});
 }
 
+=head1 TODO
+
+Probably want a way to extend abstract classes without dying, making the
+inheriting class abstract.
+
 =head1 BUGS
 
 No known bugs.
