@@ -5,9 +5,26 @@ use Moose::Util::MetaRole;
 
 =head1 NAME
 
+MooseX::ABC - abstract base classes for Moose
 
 =head1 SYNOPSIS
 
+  package Shape;
+  use Moose;
+  use MooseX::ABC;
+
+  requires 'draw';
+
+  package Circle;
+  use Moose;
+  extends 'Shape';
+
+  sub draw {
+      # stuff
+  }
+
+  my $shape = Shape->new; # dies
+  my $circle = Circle->new; # succeeds
 
 =head1 DESCRIPTION
 
