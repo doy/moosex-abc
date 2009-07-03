@@ -32,7 +32,11 @@ MooseX::ABC - abstract base classes for Moose
 
 =head1 DESCRIPTION
 
-This module adds basic abstract base class functionality to Moose. Doing C<use MooseX::ABC> turns the using class into an abstract class - it cannot be instantiated. It also allows you to mark certain methods in the class as L</required>, meaning that if a class inherits from this class without implementing that method, it will die at compile time.
+This module adds basic abstract base class functionality to Moose. Doing
+C<use MooseX::ABC> turns the using class into an abstract class - it cannot be
+instantiated. It also allows you to mark certain methods in the class as
+L</required>, meaning that if a class inherits from this class without
+implementing that method, it will die at compile time.
 
 =cut
 
@@ -42,7 +46,9 @@ This module adds basic abstract base class functionality to Moose. Doing C<use M
 
 =head2 requires METHOD_NAMES
 
-Takes a list of methods that classes inheriting from this one must implement. If a class inherits from this class without implementing each method listed here, an error will be thrown when compiling the class.
+Takes a list of methods that classes inheriting from this one must implement.
+If a class inherits from this class without implementing each method listed
+here, an error will be thrown when compiling the class.
 
 =cut
 
