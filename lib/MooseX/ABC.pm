@@ -3,6 +3,17 @@ use Moose ();
 use Moose::Exporter;
 use Moose::Util::MetaRole;
 
+=head1 NAME
+
+
+=head1 SYNOPSIS
+
+
+=head1 DESCRIPTION
+
+
+=cut
+
 sub requires {
     my $caller = shift;
     my $meta = Class::MOP::class_of($caller);
@@ -28,30 +39,56 @@ sub init_meta {
     return Class::MOP::class_of($options{for_class});
 }
 
-=for motivation
+=head1 BUGS
 
-22:41 <@rjbs> So, say I wanted to write 'shape'
-22:41 <@rjbs> as a class
-22:41 <@rjbs> but an abstract base class
-22:41 <@rjbs> I could say: requires 'area'
-22:41 <@rjbs> except I can't, because a class can't be abstract in that sense,
-              in Perl
-22:41 <@rjbs> er, in Moose
-22:42 <@rjbs> so to use a delegate is a compromise
-22:42 <@rjbs> It isn't what I want: an ABC
-22:42 <@rjbs> It isn't entirely what I don't wnat: a role
-22:42 <@doy> i wonder if something like a lazy role would work
-22:42 <@rjbs> lazy role?
-22:42 <@doy> instead of dying if all required methods aren't satisfied at
-             compile time, do it at instantiation time
-22:43 <@doy> applying a role and not satisfying all requires turns that class
-             into an abstract class
-22:43 <@rjbs> but now we're back to instantiation time!
-22:43 <@rjbs> I want compile time.
-22:44 <@rjbs> package Shape; use Moose::ABC; # now you get no new method, you
-              can't instantiate directly, and you have "requires" sugar
-22:44 <@rjbs> and if you "extends 'Shape'" without fulfilling rqeuires, you die
-22:44 <@doy> yeah, that would be nicer
+No known bugs.
+
+Please report any bugs through RT: email
+C<bug-moosex-abc at rt.cpan.org>, or browse to
+L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=MooseX-ABC>.
+
+=head1 SEE ALSO
+
+L<Moose>, L<Moose::Role>
+
+=head1 SUPPORT
+
+You can find this documentation for this module with the perldoc command.
+
+    perldoc MooseX::ABC
+
+You can also look for information at:
+
+=over 4
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/MooseX-ABC>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/MooseX-ABC>
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=MooseX-ABC>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/MooseX-ABC>
+
+=back
+
+=head1 AUTHOR
+
+  Jesse Luehrs <doy at tozt dot net>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2009 by Jesse Luehrs.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as perl itself.
 
 =cut
 
