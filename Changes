@@ -1,4 +1,8 @@
 Revision history for MooseX::ABC
 
+0.02  7/10/2009
+    Fix a warning on make_immutable when extending a class extended from an
+    abstract class
+
 0.01  7/03/2009
     Initial release
