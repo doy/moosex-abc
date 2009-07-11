@@ -58,6 +58,11 @@ around _immutable_options => sub {
         && $constructor->get_original_method == Class::MOP::class_of('Moose::Object')->get_method('new')) {
         push @options, replace_constructor => 1;
     }
+    # if our parent has been inlined and we have no required methods, then it's
+    # safe to inline ourselves
+    elsif ($constructor->isa('Moose::Meta::Method::Constructor')) {
+        push @options, replace_constructor => 1;
+    }
     return @options;
 };
 
