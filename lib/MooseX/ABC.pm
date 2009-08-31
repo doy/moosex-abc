@@ -55,7 +55,7 @@ here, an error will be thrown when compiling the class.
 sub requires {
     my $caller = shift;
     my $meta = Class::MOP::class_of($caller);
-    $meta->add_required_method($_) for @_;
+    $meta->add_required_method(@_);
 }
 
 Moose::Exporter->setup_import_methods(
