@@ -1,6 +1,5 @@
 package MooseX::ABC::Trait::Class;
 use Moose::Role;
-use MooseX::AttributeHelpers;
 
 =head1 NAME
 
@@ -14,14 +13,14 @@ dying if a subclass doesn't implement the required methods.
 =cut
 
 has required_methods => (
-    metaclass  => 'Collection::Array',
+    traits     => ['Array'],
     is         => 'ro',
     isa        => 'ArrayRef[Str]',
     default    => sub { [] },
     auto_deref => 1,
-    provides   => {
-        push  => 'add_required_method',
-        empty => 'has_required_methods',
+    handles    => {
+        add_required_method  => 'push',
+        has_required_methods => 'count',
     },
 );
 
