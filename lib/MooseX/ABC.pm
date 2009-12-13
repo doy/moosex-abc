@@ -1,7 +1,6 @@
 package MooseX::ABC;
 use Moose ();
 use Moose::Exporter;
-use Moose::Util::MetaRole;
 
 =head1 NAME
 
@@ -53,29 +52,21 @@ here, an error will be thrown when compiling the class.
 =cut
 
 sub requires {
-    my $caller = shift;
-    my $meta = Class::MOP::class_of($caller);
-    $meta->add_required_method(@_);
+    shift->add_required_method(@_);
 }
 
-Moose::Exporter->setup_import_methods(
-    with_caller => [qw(requires)],
+my ($import, $unimport, $init_meta) = Moose::Exporter->build_import_methods(
+    with_meta        => [qw(requires)],
+    install          => [qw(import unimport)],
+    metaclass_roles  => ['MooseX::ABC::Trait::Class'],
+    base_class_roles => ['MooseX::ABC::Role::Object'],
 );
 
 sub init_meta {
-    shift;
-    my %options = @_;
+    my ($package, %options) = @_;
     Carp::confess("Can't make a role into an abstract base class")
         if Class::MOP::class_of($options{for_class})->isa('Moose::Meta::Role');
-    Moose::Util::MetaRole::apply_base_class_roles(
-        for_class       => $options{for_class},
-        roles           => ['MooseX::ABC::Role::Object'],
-    );
-    Moose::Util::MetaRole::apply_metaclass_roles(
-        for_class       => $options{for_class},
-        metaclass_roles => ['MooseX::ABC::Trait::Class'],
-    );
-    return Class::MOP::class_of($options{for_class});
+    goto $init_meta if $init_meta;
 }
 
 =head1 TODO
