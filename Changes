@@ -1,5 +1,9 @@
 Revision history for MooseX::ABC
 
+0.04  12/20/2009
+    No actual changes, just repackaging with a new Dist::Zilla that doesn't
+    mess up POD stuff
+
 0.03  12/20/2009
     Allow creation of abstract subclasses of abstract classes
 
