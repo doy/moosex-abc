@@ -14,8 +14,9 @@ requires 'bar';
 package Foo::Sub;
 use Moose;
 use MooseX::ABC;
-requires 'foo';
 extends 'Foo';
+
+requires 'foo';
 
 sub bar { 'BAR' }
 

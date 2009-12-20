@@ -66,7 +66,9 @@ sub init_meta {
     my ($package, %options) = @_;
     Carp::confess("Can't make a role into an abstract base class")
         if Class::MOP::class_of($options{for_class})->isa('Moose::Meta::Role');
-    goto $init_meta if $init_meta;
+    my $ret = $init_meta->(@_);
+    Class::MOP::class_of($options{for_class})->is_abstract(1);
+    return $ret;
 }
 
 =head1 TODO
