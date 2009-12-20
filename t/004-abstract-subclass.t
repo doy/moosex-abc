@@ -16,7 +16,7 @@ use Moose;
 use MooseX::ABC;
 extends 'Foo';
 
-requires 'foo';
+requires 'baz';
 
 sub bar { 'BAR' }
 
@@ -25,6 +25,7 @@ use Moose;
 extends 'Foo::Sub';
 
 sub foo { 'FOO' }
+sub baz { 'BAZ' }
 
 package main;
 
