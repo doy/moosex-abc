@@ -1,5 +1,8 @@
 Revision history for MooseX::ABC
 
+0.05  7/18/2010
+    Fix deprecation warning in newer Moose
+
 0.04  12/20/2009
     No actual changes, just repackaging with a new Dist::Zilla that doesn't
     mess up POD stuff

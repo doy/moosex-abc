@@ -63,7 +63,9 @@ sub requires {
 my ($import, $unimport, $init_meta) = Moose::Exporter->build_import_methods(
     with_meta        => [qw(requires)],
     install          => [qw(import unimport)],
-    metaclass_roles  => ['MooseX::ABC::Trait::Class'],
+    class_metaroles  => {
+        class        => ['MooseX::ABC::Trait::Class'],
+    },
     base_class_roles => ['MooseX::ABC::Role::Object'],
 );
 
