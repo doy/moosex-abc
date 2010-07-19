@@ -1,18 +1,18 @@
-Revision history for MooseX::ABC
+Revision history for MooseX-ABC
 
-0.05  7/18/2010
-    Fix deprecation warning in newer Moose
+{{$NEXT}}
+      - Fix deprecation warning in newer Moose.
 
-0.04  12/20/2009
-    No actual changes, just repackaging with a new Dist::Zilla that doesn't
-    mess up POD stuff
+0.04  2009-12-20
+      - No actual changes, just repackaging with a new Dist::Zilla that doesn't
+        mess up POD stuff.
 
-0.03  12/20/2009
-    Allow creation of abstract subclasses of abstract classes
+0.03  2009-12-20
+      - Allow creation of abstract subclasses of abstract classes.
 
-0.02  7/10/2009
-    Fix a warning on make_immutable when extending a class extended from an
-    abstract class
+0.02  2009-07-10
+      - Fix a warning on make_immutable when extending a class extended from an
+        abstract class.
 
-0.01  7/03/2009
-    Initial release
+0.01  2009-07-03
+      - Initial release.
