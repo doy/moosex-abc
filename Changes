@@ -1,6 +1,7 @@
 Revision history for MooseX-ABC
 
 {{$NEXT}}
+      - Fix for Moose 2.06.
 
 0.05  2010-07-19
       - Fix deprecation warning in newer Moose.
