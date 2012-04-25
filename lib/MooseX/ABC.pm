@@ -53,22 +53,30 @@ sub requires {
     shift->add_required_method(@_);
 }
 
-my ($import, $unimport, $init_meta) = Moose::Exporter->build_import_methods(
-    with_meta        => [qw(requires)],
-    install          => [qw(import unimport)],
-    class_metaroles  => {
-        class        => ['MooseX::ABC::Trait::Class'],
-    },
-    base_class_roles => ['MooseX::ABC::Role::Object'],
+Moose::Exporter->setup_import_methods(
+    with_meta => [qw(requires)],
 );
 
 sub init_meta {
     my ($package, %options) = @_;
+
     Carp::confess("Can't make a role into an abstract base class")
         if Class::MOP::class_of($options{for_class})->isa('Moose::Meta::Role');
-    my $ret = $init_meta->(@_);
+
+    Moose::Util::MetaRole::apply_metaroles(
+        for             => $options{for_class},
+        class_metaroles => {
+            class => ['MooseX::ABC::Trait::Class'],
+        },
+    );
+    Moose::Util::MetaRole::apply_base_class_roles(
+        for   => $options{for_class},
+        roles => ['MooseX::ABC::Role::Object'],
+    );
+
     Class::MOP::class_of($options{for_class})->is_abstract(1);
-    return $ret;
+
+    return Class::MOP::class_of($options{for_class});
 }
 
 =head1 SEE ALSO
