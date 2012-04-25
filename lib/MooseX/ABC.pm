@@ -28,6 +28,8 @@ use Moose::Exporter;
 
 =head1 DESCRIPTION
 
+B<< NOTE: This module is almost certainly a bad idea. You really want to just be using a L<role|Moose::Role> instead! >>
+
 This module adds basic abstract base class functionality to Moose. Doing C<use
 MooseX::ABC> turns the using class into an abstract class - it cannot be
 instantiated. It also allows you to mark certain methods in the class as
