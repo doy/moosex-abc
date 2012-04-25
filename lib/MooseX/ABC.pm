@@ -1,5 +1,5 @@
 package MooseX::ABC;
-use Moose ();
+use Moose 0.94 ();
 use Moose::Exporter;
 # ABSTRACT: abstract base classes for Moose
 
@@ -74,6 +74,7 @@ sub init_meta {
 =head1 SEE ALSO
 
 L<Moose>
+
 L<Moose::Role>
 
 =begin Pod::Coverage
