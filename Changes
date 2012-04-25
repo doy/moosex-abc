@@ -1,6 +1,8 @@
 Revision history for MooseX-ABC
 
 {{$NEXT}}
+
+0.06  2012-04-25
       - Fix for Moose 2.06.
 
 0.05  2010-07-19
