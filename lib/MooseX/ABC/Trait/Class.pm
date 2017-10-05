@@ -1,5 +1,6 @@
 package MooseX::ABC::Trait::Class;
 use Moose::Role;
+use Scalar::Util 'refaddr';
 # ABSTRACT: metaclass trait for L<MooseX::ABC>
 
 =head1 DESCRIPTION
@@ -59,7 +60,7 @@ around _immutable_options => sub {
     # we know that the base class has at least our base class role applied,
     # so it's safe to replace it if there is only one wrapper.
     elsif ($constructor->isa('Class::MOP::Method::Wrapped')
-        && $constructor->get_original_method == Class::MOP::class_of('Moose::Object')->get_method('new')) {
+        && refaddr($constructor->get_original_method) == refaddr(Class::MOP::class_of('Moose::Object')->get_method('new'))) {
         push @options, replace_constructor => 1;
     }
     # if our parent has been inlined and we are not abstract, then it's
